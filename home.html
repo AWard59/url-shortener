@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>URL Shortener</title>
+<style>
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+}
+
+header {
+  background-color: #333;
+  color: white;
+  padding: 20px;
+}
+
+main {
+  padding: 20px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+label {
+  margin-bottom: 10px;
+}
+
+input[type="url"] {
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  margin-bottom: 20px;
+}
+
+button[type="submit"] {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button[type="submit"]:hover {
+  background-color: #0069d9;
+}
+
+        </style>
+</head>
+<body>
+<h1>URL Shortener</h1>
+<form method="post" action="/shorten">
+<label for="url">Enter URL to shorten:</label>
+<input type="url" name="url" id="url" required>
+<button type="submit">Shorten</button>
+</form>
+</body>
+</html>
