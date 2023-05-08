@@ -1,6 +1,6 @@
+import sys
 from flask import Flask, render_template, redirect, request
 from shortener import Shortener
-import sys
 
 app = Flask(__name__, template_folder="")
 shortener1 = Shortener()
@@ -13,12 +13,18 @@ def home():
 
 @app.route('/shorten', methods=['POST'])
 def shorten():
-    return None
+    url = request.form['url']
+    short_url = shortener1.shorten(url)
+    return render_template('result.html', short_url=short_url)
 
 
 @app.route('/<short_url>')
 def redirect_to_url(short_url):
-    return 'URL not found'
+    url = shortener1.get_url(short_url)
+    if url:
+        return redirect(url)
+    else:
+        return 'URL not found'
 
 
 if __name__ == '__main__':
