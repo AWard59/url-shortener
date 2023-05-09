@@ -1,11 +1,12 @@
 import sys
 from flask import Flask, render_template, redirect, request
-from shortener import Shortener
+from shortener import Shortener, Database
 
 app = Flask(__name__, template_folder="")
 
 # Initialize an instance of the Shortener class
 shortener1 = Shortener()
+database = Database()
 
 # Define a route for the homepage
 @app.route('/')
@@ -32,11 +33,25 @@ def shorten():
 def redirect_to_url(short_url):
     """Redirects user to the original URL associated with the given shortened URL."""
     # Call the get_url() function from the Shortener class to retrieve the original URL
-    url = shortener1.get_url(short_url)
+    url = database.get_url(short_url)
     
     # If the original URL is found in the database, redirect to it
     if url:
         return redirect(url)
+    else:
+        # If the original URL is not found, return an error message
+        return 'URL not found'
+    
+#Define a route for the short URL
+@app.route('/short_url/<short_url>')
+def short_url_route():
+    """Renders a template displaying the original URL associated with the given shortened URL"""
+    # Call the get_url() function to retrieve the original URL
+    url = database.get_url(short_url_route)
+
+    # If the original URL is found in the database, render the template with the URL
+    if url:
+        return render_template('result.html', url=url)
     else:
         # If the original URL is not found, return an error message
         return 'URL not found'

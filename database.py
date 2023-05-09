@@ -1,6 +1,5 @@
 import sqlite3
 
-
 class Database:
     """A class representing a database of shortened URLs and their original URLs."""
     def __init__(self):
